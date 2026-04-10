@@ -1,17 +1,24 @@
 # SolSentry 🛡️
-### Solana Threat Intelligence — Operator-Level Rug Pull Detection
+### Solana's Threat Intelligence Graph — Autonomous Operator-Level Detection
 
-> **"The 62nd token looked clean. The operator's history didn't."**
+> **"RugCheck tells you a fire is burning. SolSentry tells you who lit it — and where they're going next."**
 
-SolSentry is a Solana threat intelligence system that tracks **operators**, not just tokens.  
-While existing tools (RugCheck, GoPlus, DEXScreener) analyze each token in isolation, SolSentry maps the wallets behind them — across deployments, over time.
+SolSentry is an autonomous threat intelligence system for Solana that tracks **operators**, not just tokens.  
+While existing tools analyze each token or wallet in isolation, SolSentry maps the people behind the scams — across deployments, across wallets, over time.
+
+🔗 **Telegram:** [t.me/solsentryai](https://t.me/solsentryai)  
+🔗 **X/Twitter:** [@solsentryai](https://x.com/solsentryai)  
+🔗 **Hackathon:** Colosseum Frontier (April–May 2026)
 
 ---
 
 ## The Problem
 
-Serial rug pull operators deploy dozens of scam tokens from the same wallet cluster.  
-Each new token looks clean on launch. The threat signal lives in the operator's history — invisible to every per-token tool on the market.
+Serial scam operators on Solana deploy dozens of rug pulls using different wallets, rotating bot clusters, and paid KOL networks. Each new token looks clean on launch.
+
+Existing tools analyze tokens in isolation — RugCheck flags insider holders within a single token. SolScanner maps wallet connections when you ask. ChainAware scores individual wallet fraud probability. But nobody connects a serial deployer's latest token to their previous attacks.
+
+The gap isn't token-level detection — it's **cross-attack operator intelligence**.
 
 ---
 
@@ -20,20 +27,21 @@ Each new token looks clean on launch. The threat signal lives in the operator's 
 ```mermaid
 flowchart TD
     A[🔍 New Token Detected] --> B
-    B["STAGE 1 — GUARDIAN
-    12 behavioral heuristics
-    Liquidity · Holders · Mint Auth
-    Freeze Auth · LP Lock · Deployer"]
+    B["STAGE 1 — Fast Scan
+    getAccountInfo + metadata (~2s)
+    Authorities · Holders · Concentration
+    Known token early-return"]
     B -->|Elevated risk?| C
-    C["STAGE 2 — Social Graph
-    Maps deployer → drain wallets
-    → KOL accounts across tokens
-    Serial operator detection"]
+    C["STAGE 2 — Deep Analysis
+    HolderEngine · InsightX · DexScreener
+    Serial deployer check
+    Social Graph cross-reference"]
     C -->|Confirmed threat?| D
-    D["STAGE 3 — Continuous Monitor
-    WebSocket real-time tracking
-    Behavioral shift detection"]
-    D --> E[🚨 HIGH RISK ALERT]
+    D["STAGE 3 — Forensic
+    Bundle detection (Helius Enhanced TX)
+    Drain tracking (3-hop fund flow)
+    AI Explainer (multilingual)"]
+    D --> E[🚨 ALERT — Telegram Bot]
 
     style A fill:#1e293b,color:#94a3b8
     style B fill:#0f172a,color:#38bdf8
@@ -46,93 +54,135 @@ flowchart TD
 
 ## Case Study — Operator 4kxscute
 
-On **March 12, 2026**, SolSentry's social graph flagged deployer wallet `4kxscute` as a serial operator.
+SolSentry's hunter agents were already tracking deployer wallet `4kxscute` as part of a **coordinated bot cluster** — wallets sharing SOL funding sources and executing same-block buy patterns across multiple tokens.
 
-| Event | Time |
+When 4kxscute deployed a new token, the hunter fired instantly:
+
+| Detail | Value |
 |---|---|
-| Token #62 deployed by 4kxscute | T+0:00 |
-| SolSentry HIGH RISK alert issued | **T+0:04** |
-| Token appears on aggregator risk radar | T+0:27 |
-| Rug pull executed | **T+0:23** |
+| Risk Score | **100/100** |
+| Holders | 1 |
+| Top Holder Ownership | 100% |
+| Flags | MINT_AUTHORITY_ENABLED, FREEZE_AUTHORITY_ENABLED, TOP_HOLDER_OWNS_100%, VERY_FEW_HOLDERS |
+| Detection method | Hunter agent already tracking operator + auto-scan on new deploy |
 
-The token had **clean static metadata at launch**.  
-The threat signal was in the operator's history across 61 prior confirmed rug pulls — not in the token itself.
-
-> SolSentry alerted **19 minutes before the rug pull** — based entirely on operator pattern, not token metadata.
-
----
+**No other tool connected this deploy to the operator's previous activity.**  
+SolSentry already knew who he was.
 
 ### Live Alert Output
 
 ![4kxscute Hunter Alert](4kxscute-alert.png)
 
-> Real output from SolSentry's Telegram alert system. Hunter tracking 
-> operator `4kxscute` auto-triggered a scan on the new deployment — 
+> Real output from SolSentry's Telegram alert system. Hunter_1570 tracking  
+> operator `4kxscute` auto-triggered a scan on the new deployment —  
 > returning Risk 100/100 with all critical flags active.
-## Current Metrics
+
+---
+
+## Current Metrics (v2.3.1 — April 10, 2026)
 
 | Metric | Value |
 |---|---|
-| Token scans executed | 5,067 |
-| Token discoveries (monitored) | 240,618 |
-| Tokens flagged elevated risk | 4,088 |
-| Predictions resolved | 593 |
-| Correct predictions | **573 (96.6%)** |
+| Token scans executed | 5,688 |
+| Token discoveries (monitored) | 254,357 |
+| Tokens flagged elevated risk | 4,618 |
+| Prediction accuracy | **96.7% (584/604 resolved)** |
 | False positives | **0** |
-| Bot/shill clusters identified | 229 |
+| Autonomous agents alive | 30 |
+| Hunters active | 30 |
+| Wallets tracked | 3,669 |
+| Operators mapped | 109 |
+| Bot clusters identified | 229 |
+| Connected operator wallets | 847 |
 | KOL accounts tracked | 106 |
-| Connected operator wallets mapped | 847 |
+| Continuous runtime | 157.7h (local, no VPS yet) |
+| RPC endpoints | 9 (Helius, Alchemy, Triton) |
 
 ---
 
-## GUARDIAN — The Scoring Engine
+## ALife Agent Ecosystem
 
-GUARDIAN uses a **genetic algorithm** to continuously optimize the weights of its 12 detection heuristics.  
-Mutation rate is fitness-gated — genes only mutate when accuracy drops below threshold, preventing drift during stable performance periods.
+SolSentry uses **Artificial Life principles** — inspired by Tierra, Avida, and Conway's Game of Life — to evolve its detection agents autonomously.
 
-**Example gene:** `max_hunters` — governs the threshold for flagging suspicious buy-side concentration clustering.
+- **30 agents** with 7-gene DNA (spawn_threshold, max_hunters, risk_weight, etc.)
+- **Fitness tracking** — agents that predict accurately gain energy and reproduce
+- **Genetic mutation** — 30+ real mutations recorded with autonomous timestamps
+- **Natural selection** — ineffective agents are culled at 2x population cap
+- **Energy metabolism** — -0.3 per tick, births cost 15 energy
+- **MetaLearning** — market regime detection (CALM/SURGE/CRASH/MEME) every 120s
+
+This isn't marketing: `genome.json` contains recorded mutations showing parameter changes like `spawn_threshold` evolving from 70 → 95 and `max_hunters` from 10 → 30.
 
 ---
 
-## What Doesn't Exist Anywhere Else on Solana
+## Social Graph of Scam
 
-| Capability | RugCheck | GoPlus | DEXScreener | **SolSentry** |
-|---|:---:|:---:|:---:|:---:|
-| Token-level analysis | ✅ | ✅ | ✅ | ✅ |
-| Operator tracking (cross-token) | ❌ | ❌ | ❌ | ✅ |
-| Serial deployer detection | ❌ | ❌ | ❌ | ✅ |
-| Social graph mapping | ❌ | ❌ | ❌ | ✅ |
-| Drain wallet linkage | ❌ | ❌ | ❌ | ✅ |
-| KOL correlation tracking | ❌ | ❌ | ❌ | ✅ |
+Three entity types linked across every scan:
+
+| Entity | Description | Count |
+|---|---|---|
+| **OperatorProfiles** | Serial deployer identities tracked across wallets | 109 operators, 847 wallets |
+| **BotClusters** | Coordinated wallet groups (same-block buys, shared funding) | 229 clusters |
+| **ShillNetworks** | KOL-to-operator connections via early-buy patterns | 106 KOLs tracked |
+
+Every scan cross-references the graph. The more the system scans, the harder it is for operators to hide behind new wallets.
+
+---
+
+## Competitive Landscape
+
+| Capability | RugCheck | SolScanner | ChainAware | Blockaid | **SolSentry** |
+|---|:---:|:---:|:---:|:---:|:---:|
+| Token-level analysis | ✅ | — | — | ✅ | ✅ |
+| Wallet graph visualization | ❌ | ✅ | ❌ | ❌ | 🔜 |
+| Per-wallet fraud scoring | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Transaction simulation | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Operator tracking (cross-attack) | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Serial deployer detection | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Social graph mapping | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Bot cluster fingerprinting | ❌ | ✅ | ❌ | ❌ | ✅ |
+| KOL-operator correlation | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Autonomous detection (24/7) | ❌ | ❌ | ❌ | ✅ | ✅ |
+| ALife agent evolution | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Drain flow tracking | ❌ | ✅ | ❌ | ❌ | ✅ |
+
+> **SolScanner** shows you the graph when you ask. **SolSentry** builds the graph while you sleep.
 
 ---
 
 ## Technical Stack
 
-- **Language:** Python (full async architecture)
-- **RPC:** Helius + Alchemy (RPC Node, WebSocket Streaming, Enhanced APIs)
-- **Data:** Solscan API · PostgreSQL
-- **Testing:** 218 tests · 9 test files · 91 commits
+- **Language:** Python 3 (full async architecture)
+- **RPC:** Helius (5 keys) · Alchemy (3 keys) · Triton (1 key + WSS)
+- **Data Sources:** Helius DAS + Enhanced TX · DexScreener · InsightX · Nansen · Jupiter
+- **AI:** Claude Sonnet (multilingual risk explainer, 10 calls/hr)
+- **Delivery:** Telegram Bot API (forum topics, real-time alerts)
+- **Testing:** 218 tests · 9 test files · 91+ commits
+- **Applied:** DD.xyz/Webacy API grant · Helius Startup Launchpad
 
 ---
 
 ## Roadmap
 
-**Q2 2026** — Public API launch (freemium) · WebSocket Stage 3 · Stealth rug fix  
-**Q3 2026** — React dashboard (drain map, operator timeline, heat map) · Wallet SDK  
+**Q2 2026** — VPS deployment (24/7) · WebSocket Stage 3 · Free public API · Token-2022 extension checks  
+**Q3 2026** — React dashboard (drain map, operator timeline) · MCP server · x402 micropayments · B2B API  
 **Q4 2026** — Wallet Reputation Score API · Copy Trade Safety Filter · Launchpad Vetting API  
-**2027+** — Cross-chain operator tracking (ETH, BSC) · Institutional compliance API
+**2027+** — Cross-chain operator tracking (ETH, BSC) · Institutional compliance API · Seed round
 
 ---
 
 ## Built By
 
-**Crash Diniz** — Solo developer. Started learning Python last year.  
-218 tests · Full async architecture · 9 test files · 91 commits.
+**Crash Diniz** — Solo founder and developer.  
+Self-taught since the early 2000s: Slackware, Unix, Oracle networking. No university, no bootcamp.  
+Started learning Python last year — 218 tests, full async architecture, 5,688 mainnet scans.
 
 > *"Started learning Python last year" is the setup. The metrics above are the punchline.*
 
+**Looking for:** Frontend dev (React dashboard) · Security researcher · BD/growth
+
 ---
 
-*Built for the Colosseum Frontier Hackathon · April 2026*  
-*Powered by Helius · Alchemy · Solscan*
+*Built for the Colosseum Frontier Hackathon · April–May 2026*  
+*Powered by Helius · Alchemy · Triton · Claude AI*  
+*"Nunca estagnar. Sempre evoluir."*
