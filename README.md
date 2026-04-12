@@ -79,24 +79,26 @@ SolSentry already knew who he was.
 
 ---
 
-## Current Metrics (v2.3.1 — April 10, 2026)
-
-| Metric | Value |
-|---|---|
-| Token scans executed | 5,688 |
-| Token discoveries (monitored) | 254,357 |
-| Tokens flagged elevated risk | 4,618 |
-| Prediction accuracy | **96.7% (584/604 resolved)** |
-| False positives | **0** |
-| Autonomous agents alive | 30 |
-| Hunters active | 30 |
-| Wallets tracked | 3,669 |
-| Operators mapped | 109 |
-| Bot clusters identified | 229 |
-| Connected operator wallets | 847 |
-| KOL accounts tracked | 106 |
-| Continuous runtime | 157.7h (local, no VPS yet) |
-| RPC endpoints | 9 (Helius, Alchemy, Triton) |
+## Current Metrics (v2.3.5 — April 12, 2026)
+                                                                                                                                                                                                
+  | Metric | Value |                                                                                                                                                                            
+  |---|---|                                                                                                                                                                                     
+  | Token scans executed | 7,325+ |                                                                                                                                                             
+  | Token discoveries (monitored) | 269,000+ |                                                                                                                                                  
+  | Tokens flagged elevated risk | 6,000+ |                                                                                                                                                     
+  | Prediction accuracy | **86% (canônico, resolve rate subindo)** |                                                                                                                            
+  | False positives | **0** |                                                                                                                                                                 
+  | Autonomous agents alive | 26 |                                                                                                                                                              
+  | Hunters active | 30 |
+  | Wallets tracked | 4,390+ |                                                                                                                                                                  
+  | Operators mapped | 43 reais (reconstruindo) |                                                                                                                                             
+  | Bot clusters identified | 435 únicos |
+  | Connected operator wallets | 847 |                                                                                                                                                          
+  | KOL accounts tracked | 99 |
+  | Continuous runtime | 171.8h (local, no VPS yet) |                                                                                                                                           
+  | RPC endpoints | 9 (Helius, Alchemy, Triton) |                                                                                                                                             
+  | Tests passing | 246 |                                                                                                                                                                       
+  | ALife feedback loops | ✅ Consciousness + MetaLearning wired |
 
 ---
 
@@ -157,7 +159,8 @@ Every scan cross-references the graph. The more the system scans, the harder it 
 - **Data Sources:** Helius DAS + Enhanced TX · DexScreener · InsightX · Nansen · Jupiter
 - **AI:** Claude Sonnet (multilingual risk explainer, 10 calls/hr)
 - **Delivery:** Telegram Bot API (forum topics, real-time alerts)
-- **Testing:** 218 tests · 9 test files · 91+ commits
+- **Testing:** 246 tests · 9 test files · 93+ commits
+- **ALife:** Consciousness wired · MetaLearning auto_adjust · DNA snapshots · hunters_archive
 - **Applied:** DD.xyz/Webacy API grant · Helius Startup Launchpad
 
 ---
