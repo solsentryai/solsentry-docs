@@ -61,7 +61,7 @@ The REST API is live at `api.solsentry.app`. No install required:
 # Is this token risky?
 curl https://api.solsentry.app/v1/token/<mint> | jq
 
-# Who's this developer? (sentinel: 4kxscute — 634 rugs / 703 tokens / 90.2%)
+# Who's this developer? (sentinel: 4kxscute — 941 rugs / 1,060 tokens / 88.8%)
 curl https://api.solsentry.app/v1/operator/4kxscuteRLQdNiTXA33YYsvywAPNA6DQTifswxjL5pH1 | jq
 
 # Trace stolen funds across up to 10 hops
@@ -112,10 +112,10 @@ SolSentry already knew who he was.
 
 ### The full story (updated 2026-04-22)
 
-- **634 confirmed rugs / 703 total tokens / 90.2% rug rate**
+- **941 confirmed rugs / 1,060 total tokens / 88.8% rug rate** (Apr 24, 2026)
 - Risk level: **CRITICAL** — tags `fast_deployer` + `rebrand_artist`
 - **Zero indexed public record** exists for this wallet anywhere — Twitter/X, Reddit, RugCheck, GoPlus, Nansen, Arkham, academic corpora, crypto press
-- 61 bot clusters co-contain this deployer; **six wallets appear in every single one of them** — the permanent coordination core
+- Co-occurs across dozens of bot clusters; **six wallets appear in every single one of them** — the permanent coordination core
 
 SolSentry detected this by watching the operator, not the token. Every individual mint had clean on-chain metadata — token-centric tools (RugCheck, GoPlus, Blockaid) saw nothing wrong with each of the 703 mints in isolation.
 
