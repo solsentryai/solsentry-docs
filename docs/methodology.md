@@ -39,7 +39,7 @@ If stage 1 surfaces a mint/freeze authority flag combined with an operator with 
 |---|---|---|
 | Holders | Helius DAS (on demand) | top-10 concentration, wallet age distribution, insider overlap |
 | Liquidity | DexScreener | pool TVL, 24h volume, price change, pool age |
-| Bundle patterns | Helius Enhanced TX | same-block buyers, bundle wallets, funder overlap with known rugger funders |
+| Bundle patterns | Helius Enhanced TX + getTransactionsForAddress | same-block buyers, tight/wide timing clusters, shared-funder check (payer base-rate, CEX-aware), launch-window buyers when the opening-window observer is enabled |
 | Operator history | `operator_profiles.json` | tokens_created, confirmed_rugs, tags, primary_wallet linkage |
 
 ### Stage 3 — forensic (manual, heavy)
@@ -66,7 +66,7 @@ Mint authority live post-launch, freeze authority, metadata anomalies, zero-deci
 Top-10 holder concentration, wallet age of top holders (freshly-funded wallets = red flag), overlap with known sniper/insider clusters.
 
 ### Dimension 3 — Bundle signature
-Same-block buy/sell patterns, common funding source (bot clusters), known bundler wallet involvement. Cross-referenced against a running `known_bundlers.json` built from confirmed rug exits.
+Same-block buy/sell patterns, common funding source (shared first-funder, weighted by the payer's base-rate so exchange hot wallets don't count as coordination), and repeat-cluster wallets. Cross-referenced against a running registry of wallets seen in coordinated clusters across tokens; wallets whose breadth shows they buy every launch are discounted, not counted as bundlers.
 
 ### Dimension 4 — Operator history (the differentiator)
 Every deployer wallet has an `OperatorProfile`:
